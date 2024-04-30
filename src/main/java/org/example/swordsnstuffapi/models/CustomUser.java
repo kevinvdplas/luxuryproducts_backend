@@ -1,18 +1,23 @@
 package org.example.swordsnstuffapi.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity(name = "custom_user")
 public class CustomUser {
-    @Id
-    @GeneratedValue
-    private long id;
+     @Id
+     @GeneratedValue
+     private long id;
      private String email;
      private String password;
      private String firstName;
      private String lastName;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "customUser")
+    private Set<Giftcard> giftcards;
 
     public CustomUser() {
     }
@@ -24,6 +29,14 @@ public class CustomUser {
         this.lastName = lastName;
     }
 
+    public Set<Giftcard> getGiftcards() {
+        return giftcards;
+    }
+
+    public void setGiftcards(Set<Giftcard> giftcards) {
+        this.giftcards = giftcards;
+    }
+
     public long getId() {
         return id;
     }
@@ -31,7 +44,6 @@ public class CustomUser {
     public void setId(long id) {
         this.id = id;
     }
-
 
     public String getEmail() {
         return email;
