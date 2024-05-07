@@ -21,10 +21,11 @@ public class Giftcard {
     @JsonBackReference
     private CustomUser customUser;
 
-    public Giftcard(String code, double price, LocalDate expirationDate) {
+    public Giftcard(String code, double price, LocalDate expirationDate, CustomUser customUser) {
         this.code = code;
         this.price = price;
         this.expirationDate = expirationDate;
+        this.customUser = customUser;
     }
 
     public Giftcard() {}
@@ -48,6 +49,10 @@ public class Giftcard {
         if (isExpired()) {
             this.isUsed = true;
         }
+    }
+
+    public Long getUserId() {
+        return customUser != null ? customUser.getId() : null;
     }
 
     public CustomUser getCustomUser() {
