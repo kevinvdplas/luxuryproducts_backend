@@ -38,4 +38,19 @@ public class GiftcardDAO {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Foutmelding! Giftcard met dat id bestaat niet.");
         }
     }
+
+    public void activateGiftcard(long id) {
+        Optional<Giftcard> optionalGiftcard = this.giftcardRepository.findById(id);
+        if (optionalGiftcard.isPresent()) {
+            Giftcard giftcard = optionalGiftcard.get();
+            if (!giftcard.isUsed()) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Giftcard is al unchecked.");
+            } else {
+                giftcard.setUsed(false);
+                this.giftcardRepository.save(giftcard);
+            }
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Foutmelding! Giftcard met dat id bestaat niet.");
+        }
+    }
 }
