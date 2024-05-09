@@ -4,14 +4,12 @@ import org.example.swordsnstuffapi.dao.GiftcardDAO;
 import org.example.swordsnstuffapi.dao.GiftcardRepository;
 import org.example.swordsnstuffapi.models.Giftcard;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/giftcards")
 public class GiftcardController {
     private GiftcardDAO giftcardDAO;
@@ -30,5 +28,11 @@ public class GiftcardController {
     public ResponseEntity<List<Giftcard>> getAllGiftcards() {
         List<Giftcard> giftcards = this.giftcardDAO.getAllGiftcards();
         return ResponseEntity.ok(giftcards);
+    }
+
+    @PutMapping("/deactivate/{id}")
+    public ResponseEntity<String> checkGiftcard(@PathVariable long id) {
+        this.giftcardDAO.deactivateGiftcard(id);
+        return ResponseEntity.ok("Deactivated giftcard with id " + id);
     }
 }
