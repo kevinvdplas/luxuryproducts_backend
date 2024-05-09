@@ -27,6 +27,19 @@ public class Product {
         this.category = category;
     }
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", thumpnail='" + thumpnail + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", amount=" + amount +
+                ", category=" + category +
+                '}';
+    }
+
     public long getId() {
         return id;
     }

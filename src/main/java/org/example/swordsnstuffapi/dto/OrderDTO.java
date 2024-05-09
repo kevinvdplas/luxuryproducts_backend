@@ -11,9 +11,20 @@ public class OrderDTO {
 
     public double total_price;
 
+    public String name;
 
-    public OrderDTO(List<Product> products, double total_price) {
+
+    public OrderDTO(List<Product> products, double total_price, String name) {
         this.products = products;
         this.total_price = total_price;
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDTO{" +
+                "products=" + products +
+                ", total_price=" + total_price +
+                '}';
     }
 }

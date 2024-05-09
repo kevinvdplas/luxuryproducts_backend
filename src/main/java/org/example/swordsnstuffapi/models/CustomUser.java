@@ -29,6 +29,17 @@ public class CustomUser {
         this.lastName = lastName;
     }
 
+    @Override
+    public String toString() {
+        return "CustomUser{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
+
     public Set<Giftcard> getGiftcards() {
         return giftcards;
     }

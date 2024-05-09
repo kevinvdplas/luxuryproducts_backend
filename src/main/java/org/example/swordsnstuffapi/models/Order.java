@@ -31,6 +31,17 @@ public class Order {
         this.total_price = total_price;
     }
 
+    @Override
+    public String toString () {
+        return "Order{" +
+                "id=" + id +
+                ", customUser=" + customUser +
+                ", products=" + products +
+                ", status='" + status + '\'' +
+                ", total_price=" + total_price +
+                '}';
+    }
+
     public long getId() {
         return id;
     }
