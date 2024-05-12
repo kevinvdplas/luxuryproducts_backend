@@ -1,5 +1,6 @@
 package org.example.swordsnstuffapi.dao;
 
+import org.example.swordsnstuffapi.dto.GiftcardDTO;
 import org.example.swordsnstuffapi.models.Giftcard;
 import org.example.swordsnstuffapi.services.MailSenderService;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Component
 public class GiftcardDAO {
@@ -57,6 +59,30 @@ public class GiftcardDAO {
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Foutmelding! Giftcard met dat id bestaat niet.");
         }
+    }
+
+    public String createGiftcard() {
+        Random random = new Random();
+        StringBuilder codeBuilder = new StringBuilder();
+
+        String code;
+        boolean isUnique = false;
+
+        char[] alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
+
+        do {
+            for (int i = 0; i < 8; i++) {
+                codeBuilder.append(alphabet[random.nextInt(alphabet.length)]);
+                if (i == 3) {
+                    codeBuilder.append("-");
+                }
+            }
+            code = codeBuilder.toString();
+            if (!this.giftcardRepository.existsByCode(code)) {
+                isUnique = true;
+            }
+        } while (!isUnique);
+        return code;
     }
 
     @Scheduled(cron = "0 0 1 * * *", zone = "CET")

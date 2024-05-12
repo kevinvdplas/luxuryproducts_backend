@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GiftcardRepository extends JpaRepository<Giftcard, Long> {
-
+    public boolean existsByCode(String code);
 }

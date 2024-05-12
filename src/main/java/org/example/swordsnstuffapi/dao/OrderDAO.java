@@ -20,13 +20,15 @@ public class OrderDAO {
     private UserService userService;
     private GiftcardRepository giftcardRepository;
     private MailSenderService mailService;
+    private GiftcardDAO GiftcardDAO;
 
-    public OrderDAO(OrderRepository orderRepository, UserRepository userRepository, UserService userService, GiftcardRepository giftcardRepository, MailSenderService mailService) {
+    public OrderDAO(OrderRepository orderRepository, UserRepository userRepository, UserService userService, GiftcardRepository giftcardRepository, MailSenderService mailService, GiftcardDAO GiftcardDAO) {
         this.orderRepository = orderRepository;
         this.userRepository = userRepository;
         this.userService = userService;
         this.giftcardRepository = giftcardRepository;
         this.mailService = mailService;
+        this.GiftcardDAO = GiftcardDAO;
     }
 
     public List<Order> getAllOrders(){
@@ -48,9 +50,10 @@ public class OrderDAO {
         );
 
         for (Product product : orderDTO.products) {
-            if ("Giftcard".equals(orderDTO.products.get(0).getName())) {
-                Giftcard giftcard = new Giftcard("8888-8888", product.getPrice().doubleValue(), LocalDate.now().plusYears(1), customUser);
-                mailService.sendNewMail(customUser.getEmail(), "Webshop Bob giftcard code", "Hier is de code ter waarde van €" + product.getPrice() + "\n" + "Code: 8888-8888");
+            if ("Giftcard".equals(product.getName())) {
+                String code = GiftcardDAO.createGiftcard();
+                Giftcard giftcard = new Giftcard(code, product.getPrice().doubleValue(), LocalDate.now().plusYears(1), customUser);
+                mailService.sendNewMail(customUser.getEmail(), "Webshop Bob giftcard code", "Hier is de code ter waarde van €" + product.getPrice() + "\n" + "Code: " + code);
                 this.giftcardRepository.save(giftcard);
             }
         }
