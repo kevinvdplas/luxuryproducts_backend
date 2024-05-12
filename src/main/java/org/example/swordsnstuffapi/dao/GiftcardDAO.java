@@ -1,6 +1,7 @@
 package org.example.swordsnstuffapi.dao;
 
 import org.example.swordsnstuffapi.models.Giftcard;
+import org.example.swordsnstuffapi.services.MailSenderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -12,9 +13,12 @@ import java.util.Optional;
 @Component
 public class GiftcardDAO {
     private GiftcardRepository giftcardRepository;
+    private MailSenderService mailService;
 
-    public GiftcardDAO(GiftcardRepository giftcardRepository) {
+
+    public GiftcardDAO(GiftcardRepository giftcardRepository, MailSenderService mailService) {
         this.giftcardRepository = giftcardRepository;
+        this.mailService = mailService;
     }
 
 //    public List<Giftcard> getGiftcardById(long id) {
