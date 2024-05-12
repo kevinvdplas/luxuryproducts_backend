@@ -2,6 +2,7 @@ package org.example.swordsnstuffapi.dao;
 
 import org.example.swordsnstuffapi.models.Giftcard;
 import org.springframework.http.HttpStatus;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -51,6 +52,17 @@ public class GiftcardDAO {
             }
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Foutmelding! Giftcard met dat id bestaat niet.");
+        }
+    }
+
+    @Scheduled(cron = "0 0 1 * * *", zone = "CET")
+    public void expireGiftcards() {
+        List<Giftcard> giftcards = this.giftcardRepository.findAll();
+        for (Giftcard giftcard : giftcards) {
+            if(giftcard.isExpired()) {
+                giftcard.expireGiftcard();
+                this.giftcardRepository.save(giftcard);
+            }
         }
     }
 }
