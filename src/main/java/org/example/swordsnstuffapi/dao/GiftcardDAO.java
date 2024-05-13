@@ -103,4 +103,14 @@ public class GiftcardDAO {
             }
         }
     }
+
+    public void updateSaldoToGiftcard(String code, GiftcardDTO giftcardDTO) {
+        Optional<Giftcard> optionalGiftcard = this.giftcardRepository.findByCode(code);
+        if (optionalGiftcard.isPresent()) {
+            Giftcard giftcard = optionalGiftcard.get();
+            double newSaldo = giftcardDTO.price;
+            giftcard.setPrice(newSaldo);
+            this.giftcardRepository.save(giftcard);
+        }
+    }
 }

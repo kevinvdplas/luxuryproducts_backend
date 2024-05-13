@@ -2,6 +2,7 @@ package org.example.swordsnstuffapi.controller;
 
 import org.example.swordsnstuffapi.dao.GiftcardDAO;
 import org.example.swordsnstuffapi.dao.GiftcardRepository;
+import org.example.swordsnstuffapi.dto.GiftcardDTO;
 import org.example.swordsnstuffapi.models.Giftcard;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,5 +47,11 @@ public class GiftcardController {
     public ResponseEntity<String> activateGiftcard(@PathVariable long id) {
         this.giftcardDAO.activateGiftcard(id);
         return ResponseEntity.ok("Activated giftcard with id " + id);
+    }
+
+    @PutMapping("/updateSaldo/{code}")
+    public ResponseEntity<String> updateSaldoToGiftcard(@PathVariable String code, @RequestBody GiftcardDTO giftcardDTO) {
+        this.giftcardDAO.updateSaldoToGiftcard(code, giftcardDTO);
+        return ResponseEntity.ok("Updated saldo on giftcard " + code);
     }
 }
