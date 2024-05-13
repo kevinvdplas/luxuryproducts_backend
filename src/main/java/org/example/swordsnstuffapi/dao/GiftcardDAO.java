@@ -116,7 +116,9 @@ public class GiftcardDAO {
         Optional<Giftcard> optionalGiftcard = this.giftcardRepository.findByCode(code);
         if (optionalGiftcard.isPresent()) {
             Giftcard giftcard = optionalGiftcard.get();
-            double newSaldo = giftcardDTO.price;
+            double currentSaldo = giftcard.getPrice();
+            currentSaldo += giftcardDTO.price;
+            double newSaldo = currentSaldo;
             giftcard.setPrice(newSaldo);
             this.giftcardRepository.save(giftcard);
         }
