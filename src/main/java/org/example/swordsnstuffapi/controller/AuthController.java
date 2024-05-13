@@ -89,4 +89,9 @@ public class AuthController {
         }
     }
 
+    @GetMapping("/isAdmin/{email}")
+    public ResponseEntity<Boolean> isAdmin(@PathVariable String email) {
+        CustomUser customUser = userDAO.findByEmail(email);
+        return ResponseEntity.ok(customUser.isAdmin());
+    }
 }
