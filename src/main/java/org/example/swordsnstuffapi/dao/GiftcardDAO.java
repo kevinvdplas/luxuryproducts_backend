@@ -17,7 +17,6 @@ public class GiftcardDAO {
     private GiftcardRepository giftcardRepository;
     private MailSenderService mailService;
 
-
     public GiftcardDAO(GiftcardRepository giftcardRepository, MailSenderService mailService) {
         this.giftcardRepository = giftcardRepository;
         this.mailService = mailService;
@@ -29,6 +28,15 @@ public class GiftcardDAO {
 
     public List<Giftcard> getAllGiftcards() {
         return this.giftcardRepository.findAll();
+    }
+
+    public Giftcard getGiftcardByCode(String code) {
+        Optional<Giftcard> optionalGiftcard = this.giftcardRepository.findByCode(code);
+        if (optionalGiftcard.isPresent()) {
+            return optionalGiftcard.get();
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Foutmelding! Giftcard met die code bestaat niet.");
+        }
     }
 
     public void deactivateGiftcard(long id) {

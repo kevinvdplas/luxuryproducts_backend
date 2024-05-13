@@ -14,6 +14,7 @@ public class CustomUser {
      private String password;
      private String firstName;
      private String lastName;
+     private boolean admin = false;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "customUser")
@@ -22,11 +23,12 @@ public class CustomUser {
     public CustomUser() {
     }
 
-    public CustomUser(String email, String password, String firstName, String lastName) {
+    public CustomUser(String email, String password, String firstName, String lastName, boolean admin) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.admin = admin;
     }
 
     @Override
@@ -86,5 +88,13 @@ public class CustomUser {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 }

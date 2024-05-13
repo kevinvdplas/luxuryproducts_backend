@@ -30,6 +30,12 @@ public class GiftcardController {
         return ResponseEntity.ok(giftcards);
     }
 
+    @GetMapping("/code/{code}")
+    public ResponseEntity<Giftcard> getGiftcardByCode(@PathVariable String code) {
+        Giftcard giftcard = this.giftcardDAO.getGiftcardByCode(code);
+        return ResponseEntity.ok(giftcard);
+    }
+
     @PutMapping("/deactivate/{id}")
     public ResponseEntity<String> deactivateGiftcard(@PathVariable long id) {
         this.giftcardDAO.deactivateGiftcard(id);

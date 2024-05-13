@@ -38,7 +38,8 @@ public class Seeder {
                 "test@mail.com",
                 encodedPassword,
                 "bob",
-                "webshop"
+                "webshop",
+                true
         );
 
         this.userRepository.save(customer);
@@ -87,8 +88,8 @@ public class Seeder {
         // Sla de order op
         this.orderRepository.save(luxuryOrder);
 
-        CustomUser user = userRepository.findById(1L).orElse(null); // Retrieve the user or handle null if not found
-        Giftcard giftcard7 = new Giftcard("1234-5678", 50.00, LocalDate.now().plusYears(1), user);
+        CustomUser user = userRepository.findById(1L).orElse(null);
+        Giftcard giftcard7 = new Giftcard("1234-5678", 69.00, LocalDate.now().plusYears(1), user);
 
         this.giftcardRepository.save(giftcard7);
     }
