@@ -17,7 +17,7 @@ public class Giftcard {
     private LocalDate expirationDate;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "user_id")
     @JsonBackReference
     private CustomUser customUser;
 

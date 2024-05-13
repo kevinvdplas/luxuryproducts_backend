@@ -19,15 +19,15 @@ public class GiftcardController {
         this.giftcardDAO = giftcardDAO;
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<List<Giftcard>> getGiftcardById(@PathVariable long id) {
-//        List<Giftcard> giftcards = this.giftcardDAO.getGiftcardById(id);
-//        return ResponseEntity.ok(giftcards);
-//    }
-
     @GetMapping()
     public ResponseEntity<List<Giftcard>> getAllGiftcards() {
         List<Giftcard> giftcards = this.giftcardDAO.getAllGiftcards();
+        return ResponseEntity.ok(giftcards);
+    }
+
+    @GetMapping("/{email}")
+    public ResponseEntity<List<Giftcard>> getGiftcardsByEmail(@PathVariable String email) {
+        List<Giftcard> giftcards = this.giftcardDAO.getGiftcardsByEmail(email);
         return ResponseEntity.ok(giftcards);
     }
 

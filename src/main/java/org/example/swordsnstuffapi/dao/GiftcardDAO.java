@@ -16,10 +16,12 @@ import java.util.Random;
 public class GiftcardDAO {
     private GiftcardRepository giftcardRepository;
     private MailSenderService mailService;
+    private UserDAO userDAO;
 
-    public GiftcardDAO(GiftcardRepository giftcardRepository, MailSenderService mailService) {
+    public GiftcardDAO(GiftcardRepository giftcardRepository, MailSenderService mailService, UserDAO userDAO) {
         this.giftcardRepository = giftcardRepository;
         this.mailService = mailService;
+        this.userDAO = userDAO;
     }
 
 //    public List<Giftcard> getGiftcardById(long id) {
@@ -28,6 +30,12 @@ public class GiftcardDAO {
 
     public List<Giftcard> getAllGiftcards() {
         return this.giftcardRepository.findAll();
+    }
+
+    public List<Giftcard> getGiftcardsByEmail(String email) {
+        System.out.println("Email:" + email);
+        long user_id = userDAO.getUserIdByEmail(email);
+        return this.giftcardRepository.findByCustomUser_Id(user_id);
     }
 
     public Giftcard getGiftcardByCode(String code) {

@@ -9,4 +9,9 @@ public class UserDAO {
     public UserDAO(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
+    public Long getUserIdByEmail(String email) {
+//        System.out.println("Email:" + email);
+        return this.userRepository.findByEmail(email).getId();
+    }
 }
