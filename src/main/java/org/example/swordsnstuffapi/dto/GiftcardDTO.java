@@ -8,4 +8,12 @@ public class GiftcardDTO {
         this.price = price;
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "GiftcardDTO{" +
+                "price=" + price +
+                ", id=" + id +
+                '}';
+    }
 }

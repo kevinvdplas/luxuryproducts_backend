@@ -51,8 +51,14 @@ public class GiftcardController {
 
     @PutMapping("/updateSaldo/{code}")
     public ResponseEntity<String> updateSaldoToGiftcard(@PathVariable String code, @RequestBody GiftcardDTO giftcardDTO) {
-        System.out.println(giftcardDTO);
         this.giftcardDAO.updateSaldoToGiftcard(code, giftcardDTO);
+        return ResponseEntity.ok("Updated saldo on giftcard " + code);
+    }
+
+    @PutMapping("/updateSaldoFromOrder/{code}")
+    public ResponseEntity<String> updateSaldoFromOrder(@PathVariable String code, @RequestBody GiftcardDTO giftcardDTO) {
+        double price = giftcardDTO.price;
+        this.giftcardDAO.updateSaldoFromOrder(code, price);
         return ResponseEntity.ok("Updated saldo on giftcard " + code);
     }
 }

@@ -42,7 +42,6 @@ public class OrderDAO {
 
     public void createOrder(OrderDTO orderDTO){
         CustomUser customUser = userService.getActiveUser();
-        System.out.println("Gebruiker:" + customUser + "OrderDTO:" + orderDTO);
         Order newOrder = new Order(
                 customUser,
                 orderDTO.products,

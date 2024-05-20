@@ -33,7 +33,6 @@ public class GiftcardDAO {
     }
 
     public List<Giftcard> getGiftcardsByEmail(String email) {
-        System.out.println("Email:" + email);
         long user_id = userDAO.getUserIdByEmail(email);
         return this.giftcardRepository.findByCustomUser_Id(user_id);
     }
@@ -120,6 +119,15 @@ public class GiftcardDAO {
             currentSaldo += giftcardDTO.price;
             double newSaldo = currentSaldo;
             giftcard.setPrice(newSaldo);
+            this.giftcardRepository.save(giftcard);
+        }
+    }
+
+    public void updateSaldoFromOrder(String code, double price) {
+        Optional<Giftcard> optionalGiftcard = this.giftcardRepository.findByCode(code);
+        if (optionalGiftcard.isPresent()) {
+            Giftcard giftcard = optionalGiftcard.get();
+            giftcard.setPrice(price);
             this.giftcardRepository.save(giftcard);
         }
     }
