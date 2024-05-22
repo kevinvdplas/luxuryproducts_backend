@@ -2,6 +2,9 @@ package org.example.swordsnstuffapi.models;
 
 import jakarta.persistence.*;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity(name = "entity_order")
@@ -19,7 +22,6 @@ public class Order {
     private String status = "processing";
 
     private double total_price;
-
 
     public Order() {
 

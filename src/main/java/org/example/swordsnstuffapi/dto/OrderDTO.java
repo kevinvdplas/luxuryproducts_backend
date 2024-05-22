@@ -3,6 +3,7 @@ package org.example.swordsnstuffapi.dto;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import org.example.swordsnstuffapi.models.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDTO {
