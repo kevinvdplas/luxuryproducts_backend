@@ -11,10 +11,12 @@ public class OrderGiftcardUsage {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JsonBackReference
+    @JoinColumn(name = "order_id")
     private Order order;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JsonBackReference
+    @JoinColumn(name = "giftcard_id")
     private Giftcard giftcard;
 
     public OrderGiftcardUsage(Order order, Giftcard giftcard) {
