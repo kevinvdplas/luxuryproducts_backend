@@ -19,6 +19,9 @@ public class Order {
     @ManyToMany
     private List<Product> products;
 
+    @OneToMany(mappedBy = "order", cascade = CascadeType.MERGE)
+    private List<OrderGiftcardUsage> orderGiftcardUsages;
+
     private String status = "processing";
 
     private double total_price;
@@ -27,10 +30,11 @@ public class Order {
 
     }
 
-    public Order(CustomUser customUser, List<Product> products, double total_price) {
+    public Order(CustomUser customUser, List<Product> products, double total_price, List<OrderGiftcardUsage> orderGiftcardUsages) {
         this.customUser = customUser;
         this.products = products;
         this.total_price = total_price;
+        this.orderGiftcardUsages = orderGiftcardUsages;
     }
 
     @Override
@@ -82,5 +86,13 @@ public class Order {
 
     public void setTotal_price(double total_price) {
         this.total_price = total_price;
+    }
+
+    public List<OrderGiftcardUsage> getOrderGiftcardUsages() {
+        return orderGiftcardUsages;
+    }
+
+    public void setOrderGiftcardUsages(List<OrderGiftcardUsage> orderGiftcardUsages) {
+        this.orderGiftcardUsages = orderGiftcardUsages;
     }
 }

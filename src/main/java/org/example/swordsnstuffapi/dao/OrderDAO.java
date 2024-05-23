@@ -45,13 +45,14 @@ public class OrderDAO {
         Order newOrder = new Order(
                 customUser,
                 orderDTO.products,
-                orderDTO.total_price
+                orderDTO.total_price,
+                null
         );
 
         for (Product product : orderDTO.products) {
             if ("Giftcard".equals(product.getName())) {
                 String code = GiftcardDAO.createGiftcard();
-                Giftcard giftcard = new Giftcard(code, product.getPrice().doubleValue(), LocalDate.now().plusYears(1), customUser);
+                Giftcard giftcard = new Giftcard(code, product.getPrice().doubleValue(), LocalDate.now().plusYears(1), customUser, null);
                 mailService.sendNewMail(customUser.getEmail(), "Webshop Bob giftcard code", "Hier is de code ter waarde van €" + product.getPrice() + "\n" + "Code: " + code);
                 this.giftcardRepository.save(giftcard);
             }

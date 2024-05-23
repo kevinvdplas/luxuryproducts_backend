@@ -83,14 +83,15 @@ public class Seeder {
         Order luxuryOrder = new Order(
                 customer,
                 luxuryProducts,
-                40893274
+                40893274,
+                null
         );
 
         // Sla de order op
         this.orderRepository.save(luxuryOrder);
 
         CustomUser user = userRepository.findById(1L).orElse(null);
-        Giftcard giftcard7 = new Giftcard("1234-5678", 69.00, LocalDate.now().plusYears(1), user);
+        Giftcard giftcard7 = new Giftcard("1234-5678", 69.00, LocalDate.now().plusYears(1), user, null);
 
         this.giftcardRepository.save(giftcard7);
     }

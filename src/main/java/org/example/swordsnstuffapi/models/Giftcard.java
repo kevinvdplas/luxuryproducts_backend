@@ -23,11 +23,15 @@ public class Giftcard {
     @JsonBackReference
     private CustomUser customUser;
 
-    public Giftcard(String code, double price, LocalDate expirationDate, CustomUser customUser) {
+    @OneToMany(mappedBy = "giftcard", cascade = CascadeType.MERGE)
+    private List<OrderGiftcardUsage> orderGiftcardUsages;
+
+    public Giftcard(String code, double price, LocalDate expirationDate, CustomUser customUser, List<OrderGiftcardUsage> orderGiftcardUsages) {
         this.code = code;
         this.price = price;
         this.expirationDate = expirationDate;
         this.customUser = customUser;
+        this.orderGiftcardUsages = orderGiftcardUsages;
     }
 
     public Giftcard() {}
@@ -103,5 +107,13 @@ public class Giftcard {
 
     public void setExpirationDate(LocalDate expirationDate) {
         this.expirationDate = expirationDate;
+    }
+
+    public List<OrderGiftcardUsage> getOrderGiftcardUsages() {
+        return orderGiftcardUsages;
+    }
+
+    public void setOrderGiftcardUsages(List<OrderGiftcardUsage> orderGiftcardUsages) {
+        this.orderGiftcardUsages = orderGiftcardUsages;
     }
 }
