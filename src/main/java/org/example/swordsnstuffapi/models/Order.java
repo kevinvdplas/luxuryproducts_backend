@@ -1,5 +1,6 @@
 package org.example.swordsnstuffapi.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.lang.reflect.Array;
@@ -20,6 +21,7 @@ public class Order {
     private List<Product> products;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.MERGE)
+    @JsonManagedReference
     private List<OrderGiftcardUsage> orderGiftcardUsages;
 
     private String status = "processing";

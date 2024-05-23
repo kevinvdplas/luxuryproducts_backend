@@ -1,6 +1,7 @@
 package org.example.swordsnstuffapi.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -24,6 +25,7 @@ public class Giftcard {
     private CustomUser customUser;
 
     @OneToMany(mappedBy = "giftcard", cascade = CascadeType.MERGE)
+    @JsonManagedReference
     private List<OrderGiftcardUsage> orderGiftcardUsages;
 
     public Giftcard(String code, double price, LocalDate expirationDate, CustomUser customUser, List<OrderGiftcardUsage> orderGiftcardUsages) {

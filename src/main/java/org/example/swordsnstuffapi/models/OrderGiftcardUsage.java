@@ -1,5 +1,6 @@
 package org.example.swordsnstuffapi.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,9 +10,11 @@ public class OrderGiftcardUsage {
     private int id;
 
     @ManyToOne(cascade = CascadeType.MERGE)
+    @JsonBackReference
     private Order order;
 
     @ManyToOne(cascade = CascadeType.MERGE)
+    @JsonBackReference
     private Giftcard giftcard;
 
     public OrderGiftcardUsage(Order order, Giftcard giftcard) {
