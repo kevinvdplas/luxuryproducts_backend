@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Giftcard {
@@ -38,25 +39,41 @@ public class Giftcard {
 
     public Giftcard() {}
 
+//    @Override
+//    public String toString() {
+//        return "Giftcard{" +
+//                "id=" + giftcard_id +
+//                ", code='" + code + '\'' +
+//                ", price=" + price +
+//                ", isUsed=" + isUsed +
+//                ", expirationDate=" + expirationDate +
+//                '}';
+//    }
+
+//    public boolean isExpired() {
+//        return !isUsed && LocalDate.now().isAfter(expirationDate);
+//    }
+//
+//    public void expireGiftcard() {
+//        if (isExpired()) {
+//            this.isUsed = true;
+//        }
+//    }
+
     @Override
-    public String toString() {
-        return "Giftcard{" +
-                "id=" + giftcard_id +
-                ", code='" + code + '\'' +
-                ", price=" + price +
-                ", isUsed=" + isUsed +
-                ", expirationDate=" + expirationDate +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Giftcard giftcard = (Giftcard) o;
+        return Objects.equals(code, giftcard.code) &&
+                Objects.equals(price, giftcard.price) &&
+                Objects.equals(expirationDate, giftcard.expirationDate) &&
+                Objects.equals(customUser, giftcard.customUser);
     }
 
-    public boolean isExpired() {
-        return !isUsed && LocalDate.now().isAfter(expirationDate);
-    }
-
-    public void expireGiftcard() {
-        if (isExpired()) {
-            this.isUsed = true;
-        }
+    @Override
+    public int hashCode() {
+        return Objects.hash(code, price, expirationDate, customUser);
     }
 
     public Long getUserId() {

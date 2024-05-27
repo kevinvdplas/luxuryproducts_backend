@@ -100,16 +100,16 @@ public class GiftcardDAO {
         return code;
     }
 
-    @Scheduled(cron = "0 0 1 * * *", zone = "CET")
-    public void expireGiftcards() {
-        List<Giftcard> giftcards = this.giftcardRepository.findAll();
-        for (Giftcard giftcard : giftcards) {
-            if(giftcard.isExpired()) {
-                giftcard.expireGiftcard();
-                this.giftcardRepository.save(giftcard);
-            }
-        }
-    }
+//    @Scheduled(cron = "0 0 1 * * *", zone = "CET")
+//    public void expireGiftcards() {
+//        List<Giftcard> giftcards = this.giftcardRepository.findAll();
+//        for (Giftcard giftcard : giftcards) {
+//            if(giftcard.isExpired()) {
+//                giftcard.expireGiftcard();
+//                this.giftcardRepository.save(giftcard);
+//            }
+//        }
+//    }
 
     public void updateSaldoToGiftcard(String code, GiftcardDTO giftcardDTO) {
         Optional<Giftcard> optionalGiftcard = this.giftcardRepository.findByCode(code);

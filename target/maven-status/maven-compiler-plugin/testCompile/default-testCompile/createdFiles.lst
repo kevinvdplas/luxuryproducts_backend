@@ -1,0 +1,4 @@
+org\example\swordsnstuffapi\GiftcardTests.class
+org\example\swordsnstuffapi\SwordsNstuffApiApplicationTests.class
+org\example\swordsnstuffapi\OrderTests.class
+org\example\swordsnstuffapi\OrderGiftcardUsageTests.class
